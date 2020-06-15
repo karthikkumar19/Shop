@@ -1,10 +1,20 @@
 import React from 'react';
-import {View,Text,Button,StyleSheet,Image} from 'react-native';
+import {View,Text,Button,StyleSheet,Image,
+    TouchableNativeFeedback,TouchableOpacity,Platform} from 'react-native';
 import Colors from '../../constants/Colors';
 
+
+
 const ProductItem = props => {
+
+    let Touchablecmp = TouchableOpacity;
+    if(Platform.OS === 'android' && Platform.Version >= 21){
+        Touchablecmp = TouchableNativeFeedback
+    }
+
     return(
-        <View style={styles.Product}>
+        <Touchablecmp onPress={props.onViewDetail} >
+ <View style={styles.Product}>
             <View style={styles.imageContainer}>
             <Image style={styles.image} source={{uri: props.image}}/>
 
@@ -19,6 +29,8 @@ const ProductItem = props => {
                 <Button color={Colors.primary} title='To Cart' onPress={props.onAddToCart} />
             </View>
         </View>
+        </Touchablecmp>
+       
     )
 }
 
@@ -47,11 +59,13 @@ overflow:'hidden',
 },
 title:{
     fontSize:18,
-    marginVertical:4
+    marginVertical:2,
+    fontFamily:'open-sans-reg'
 },
 price:{
     fontSize:14,
-    color:'#888'
+    color:'#888',
+    fontFamily:'open-sans-reg'
 },
 actions:{
     flexDirection:'row',
