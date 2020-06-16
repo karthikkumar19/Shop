@@ -6,12 +6,15 @@ import * as Font from 'expo-font';
 
 import productsReducer from './store/reducers/products';
 import ShopNavigator from './navigation/ShopNavigator';
+import cartReducer from './store/reducers/cart';
 
 const rootReducer = combineReducers({
-  products: productsReducer
+  products: productsReducer,
+  cart: cartReducer
 });
 
 const store = createStore(rootReducer);
+// const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const fetchFonts = () => {
   return Font.loadAsync({
