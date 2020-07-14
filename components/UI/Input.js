@@ -72,10 +72,11 @@ const Input = props => {
         onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
       />
-      {!inputState.isValid && inputState.touched &&
-        <View style={styles.errorContainer}> 
-        <Text style={styles.errorText}>{props.errorText}</Text>
-        </View>}
+      {!inputState.isValid && inputState.touched && (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{props.errorText}</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -94,12 +95,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     borderBottomWidth: 1
   },
-  errorContainer:{
-      marginVertical:5
+  errorContainer: {
+    marginVertical: 5
   },
-  errorText:{
-      color:'red',
-      fontSize:13
+  errorText: {
+    fontFamily: 'open-sans-reg',
+    color: 'red',
+    fontSize: 13
   }
 });
 
