@@ -26,6 +26,14 @@ if(loading){
     )
 }
 
+if(orders.length === 0 ){
+    return(
+        <View style={{flex:1, justifyContent:'center', alignItems:'center' }}>
+            <Text>No order is found , maybe start order some?</Text>
+        </View>
+    )
+}
+
     return (
       <FlatList data={orders} keyExtractor={item => item.id} 
       renderItem={itemData => <OrderItem amount={itemData.item.totalAmount} 

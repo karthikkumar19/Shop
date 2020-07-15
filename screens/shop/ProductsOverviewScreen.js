@@ -1,5 +1,5 @@
 import React ,{useEffect, useState, useCallback}from 'react';
-import {FlatList,Button, ActivityIndicator,View, StyleSheet,Text } from 'react-native';
+import {FlatList,Button, ActivityIndicator,View, StyleSheet,Text, YellowBox } from 'react-native';
 import {useSelector,useDispatch} from 'react-redux';
 import ProductItem from '../../components/Shop/ProductItem';
 import * as cartActions from '../../store/actions/cart';
@@ -40,6 +40,7 @@ useEffect(() => {
 
 
     useEffect(() => {
+        YellowBox.ignoreWarnings(['Setting a timer'])
         setLoading(true);
         loadProducts().then(() => {
             setLoading(false)
