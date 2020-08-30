@@ -56,7 +56,7 @@ const sendOrderHandler = async () => {
     )
 }
 
-CartScreen.navigationOptions = {
+export const screenOptions = {
     headerTitle:' Your Cart'
 }
 

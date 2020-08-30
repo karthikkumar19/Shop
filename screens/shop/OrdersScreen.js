@@ -43,7 +43,7 @@ if(orders.length === 0 ){
 }
 
 
-OrdersScreen.navigationOptions =navData => {
+export const screenOptions =navData => {
     return{
         headerTitle: 'Your Orders',
         headerLeft : () => <HeaderButtons HeaderButtonComponent={Headerbutton}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList,Button,Alert,View,Text} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch,} from 'react-redux';
 import ProductItem from '../../components/Shop/ProductItem';
 import {HeaderButtons,Item} from 'react-navigation-header-buttons';
 import Headerbutton from '../../components/UI/Headerbutton';
@@ -8,8 +8,8 @@ import Colors from '../../constants/Colors';
 import * as productsActions from '../../store/actions/products';
 
 const UserProductsScreen = props => {
-    const dispatch = useDispatch();
-    const userProducts = useSelector(state => state.products.userProducts);
+    const dispatch = useDispatch(); 
+    const userProducts = useSelector(state => state.products.userProducts); 
 
     const editProductHandler = id => {
         props.navigation.navigate('EditProduct', {productId: id})
@@ -50,7 +50,8 @@ const UserProductsScreen = props => {
     )
 }
 
-UserProductsScreen.navigationOptions =navData => {
+
+export const screenOptions =navData => {
     return{
         headerTitle: 'User Products',
         headerLeft : () => <HeaderButtons HeaderButtonComponent={Headerbutton}>

@@ -11,6 +11,7 @@ import * as productsActions from '../../store/actions/products';
 const ProductsOverviewScreen = props => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products.availableProducts);
+    const userProduct = useSelector(state => state.products.userProducts)
     const [loading,setLoading] = useState(false);
     const [refreshing,setRefreshing] = useState(false);
     const [error, setError] = useState('');
@@ -21,6 +22,7 @@ const ProductsOverviewScreen = props => {
         setError(null)
         try{
             await dispatch(productsActions.fetchProduct());
+           
         } catch (err) {
             setError(err.message)
         }
@@ -28,19 +30,19 @@ const ProductsOverviewScreen = props => {
     },[dispatch,setError,setLoading]);
 
 useEffect(() => {
-    const willFocusSub = props.navigation.addListener(
-        'willFocus',
+    const unSubscribe = props.navigation.addListener(
+        'focus',
         loadProducts
     );
 
     return () => {
-        willFocusSub.remove();
+        unSubscribe();
     }
 },[loadProducts])
 
 
     useEffect(() => {
-        YellowBox.ignoreWarnings(['Setting a timer'])
+        // YellowBox.ignoreWarnings(['Setting a timer'])
         setLoading(true);
         loadProducts().then(() => {
             setLoading(false)
@@ -100,7 +102,7 @@ if(!loading && products.length === 0){
     )
 };
 
-ProductsOverviewScreen.navigationOptions =navData => {
+export const screenOptions = navData => {
     return{
         headerTitle: 'All Products',
         headerLeft : () => <HeaderButtons HeaderButtonComponent={Headerbutton}>

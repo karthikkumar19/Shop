@@ -28,7 +28,9 @@ export const fetchProduct = () => {
                );
            }
            dispatch({type:SET_PRODUCT, products:loadedProducts,
-             userProducts: loadedProducts.filter(prod => prod.ownerId === userId)})
+             userProducts: loadedProducts.filter(prod => prod.ownerId === userId)
+            // userProducts: loadedProducts
+        })
         } catch (err) {
             // send custom
             throw err;
@@ -74,7 +76,6 @@ export const createProduct = (title, description, imageUrl, price) => {
         });
         const resData = await response.json();
 
-        console.log(resData);
         dispatch({
             type: CREATE_PRODUCT,
             productData:{
