@@ -116,7 +116,7 @@ const AuthScreen = props => {
         secureTextEntry
         required
         minLength={5}
-         autoCaptialize='none' 
+         autoCaptialize='none'
         errorText='Plese enter the vaild Password'
         onInputChange={inputChangeHandler}
         initialValue='' />

@@ -3,6 +3,9 @@ export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const SET_PRODUCT = 'SET_PRODUCT';
+import * as Notifications from 'expo-notifications';
+// import {Notifications} from 'expo';
+import * as Permissions from 'expo-permissions';
 
 export const fetchProduct = () => {
     return async (dispatch,getState) => {
@@ -59,6 +62,17 @@ export const deleteProduct = productId => {
 export const createProduct = (title, description, imageUrl, price) => {
     return async (dispatch,getState) => {
         //any async code you want!
+        let pushToken;
+        let statusObj = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+        if(statusObj.status !== 'granted'){
+             statusObj = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        }
+        if(statusObj.status !== 'granted'){
+            pushToken = null;
+        }else{
+            pushToken = await Notifications.getExpoPushTokenAsync();
+        }
+
         const token = getState().auth.token;
         const userId = getState().auth.userId;
         const response = await fetch(`https://shop-rn-5ba9d.firebaseio.com/products.json?auth=${token}`,{
@@ -71,7 +85,8 @@ export const createProduct = (title, description, imageUrl, price) => {
                 description,
                 imageUrl,
                 price,
-                ownerId: userId
+                ownerId: userId,
+                ownerPushToken: pushToken
             })
         });
         const resData = await response.json();
